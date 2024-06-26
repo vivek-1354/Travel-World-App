@@ -1,12 +1,13 @@
 const express = require('express');
-const hotels = require('../data/hotels');
 const router = express.Router();
+const Hotel = require('../model/hotel.model');
 
 
 router.get('/', (req, res) => {
-    res.json(hotels.data);
+    Hotel.find()
+        .then(hotels => res.json(hotels))
+        .catch(err => res.status(400).json('Error: ' + err));
 });
-
 
 
 // Export the router
