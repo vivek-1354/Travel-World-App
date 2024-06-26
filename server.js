@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 
 const cors = require('cors')
 const hotelRouter = require('./routes/hotel.router');
+const hotelDataAddedToDB = require('./routes/dataimport.router')
 const connectDB = require('./config/dbconfig');
 
 
@@ -15,6 +16,7 @@ app.use(cors())
 
 connectDB()
 
+app.use('/api/hoteldata', hotelDataAddedToDB)
 app.use('/api/hotels', hotelRouter)
 
 
