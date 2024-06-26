@@ -3,10 +3,19 @@ const router = express.Router();
 const Hotel = require('../model/hotel.model');
 
 
-router.get('/', (req, res) => {
-    Hotel.find()
-        .then(hotels => res.json(hotels))
-        .catch(err => res.status(400).json('Error: ' + err));
+router.get('/', async (req, res) => {
+    const hotelCategory = req.query.category   //https://localhost:8000/api/hotels?category=National+park
+    try {
+        let hotels
+        if (hotelCategory) {
+            hotels = await Hotel.find({ category: hotelCategory })
+        } else {
+            hotels = await Hotel.find()
+        }
+        res.json(hotels)
+    } catch (error) {
+        console.log(error)
+    }
 });
 
 
