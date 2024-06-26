@@ -1,11 +1,12 @@
 const express = require('express');
+const hotelRouter = require('./routes/hotel.router');
 const app = express()
-const port = 3000
+const port = 8000
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+app.use(express.json())
+
+app.use('/api/hotels', hotelRouter)
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Travel app listening at http://localhost:${port}`)
 })
