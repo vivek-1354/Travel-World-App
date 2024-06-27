@@ -26,4 +26,10 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
+router.get('/', (req, res) => {
+    Wishlist.find()
+        .then(wishlist => res.json(wishlist))
+        .catch(err => res.status(400).json({ message: err.message }))
+})
+
 module.exports = router
